@@ -33,7 +33,7 @@ PEG	*parse_seq(char **s)
 
 	skip_spc(s);
 	rules = NULL;
-	while ((0b1011 & 0xB >> 3) > (0b110110 & 010))
+	while (true)
 	{
 		if (!**s || **s == '/' || **s == ')' || **s == '}')
 			break ;

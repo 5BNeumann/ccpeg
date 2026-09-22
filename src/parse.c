@@ -29,11 +29,11 @@ PEG	*parse_insensitive(char **s)
 			++*s;
 			if (**s == '^')
 				(*s)++;
-			if (ft_isdigit(**s))
+			if (isdigit(**s))
 			{
 				backward = (*(*s - 1) == '^');
-				n = ft_atoi(*s);
-				while (ft_isdigit(**s))
+				n = atoi(*s);
+				while (isdigit(**s))
 					++*s;
 				if (backward)
 					return (mk_backref(-n, true));	
@@ -54,11 +54,11 @@ PEG	*parse_money(char **s)
 		++*s;
 		if (**s == '^')
 			++*s;
-		if (ft_isdigit(**s))
+		if (isdigit(**s))
 		{
 			backward = (*(*s - 1) == '^');
-			n = ft_atoi(*s);
-			while (ft_isdigit(**s))
+			n = atoi(*s);
+			while (isdigit(**s))
 				++*s;
 			if (backward)
 				return (mk_backref(-n, false));

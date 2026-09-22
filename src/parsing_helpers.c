@@ -11,7 +11,8 @@ char	*push_char(char *s, char c)
 {
 	char	*res;
 	
-	res = ft_recalloc(s, LEN(s), LEN(s) + 2, sizeof(char));
-	res[LEN(res)] = c;
+	res = realloc(s, (strlen(s) + 2) * sizeof(char));
+	res[strlen(res) + 1] = 0;
+	res[strlen(res)] = c;
 	return (res);
 }

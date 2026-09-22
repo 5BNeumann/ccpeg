@@ -1,11 +1,15 @@
 #ifndef CCPEG_INT_H
 # define CCPEG_INT_H
 # include <stdint.h>
-# include "libft.h"
+# include <stdbool.h>
+# include <stdlib.h>
+# include <errno.h>
+# include <string.h>
+# include <ctype.h>
+# include <sys/param.h>
 # define PEG t_peg_rule
 # define SV t_string_view
 # define MAX_MATCHES 20
-#define LEN ft_strlen
 
 typedef struct s_peg_rule	t_peg_rule;
 
@@ -148,6 +152,8 @@ PEG			*tail(PEG *list);
 /*  UTILS  */
 /* ******* */
 
+void		*free_nt_tab(char **str, const int32_t alloc_count);
+uintmax_t	nt_tablen(void **tab);
 char		*push_char(char *s, char c);
 void		skip_spc(char **str);
 

@@ -10,7 +10,7 @@ intmax_t	match_backref(PEG *rule, t_string_view *str, char **mtch, t_act act)
 		ts = make_new_sv(mtch[rule->rule.bak_match.ith - 1]);
 	else
 	{
-		ts = make_new_sv(mtch[ft_nt_tablen((void *)mtch)
+		ts = make_new_sv(mtch[nt_tablen((void *)mtch)
 				- rule->rule.bak_match.ith]);
 	}
 	m = (PEG){(union u_peg_rule){
@@ -27,14 +27,14 @@ intmax_t	match_class(t_peg_rule *rule, t_string_view *str, t_act act)
 
 	if (!*str->string)
 		return (-1);
-	target_set = ft_strndup(rule->rule.str_match.target->string,
+	target_set = strndup(rule->rule.str_match.target->string,
 			rule->rule.str_match.target->len);
 	if (!target_set)
 		return (-1);
-	if (ft_strchr(target_set, *str->string))
+	if (strchr(target_set, *str->string))
 	{
 		free(target_set);
-		if (act != PEEK)
+		(void)act;
 			sv_chop_left(str, 1);
 		return (1);
 	}
@@ -47,7 +47,7 @@ intmax_t	match_dot(PEG *rule, t_string_view *str, t_act act)
 	(void)rule;
 	if (*str->string && *str->string != '\n')
 	{
-		if (act != PEEK)
+		(void)act;
 			sv_chop_left(str, 1);
 		return (1);
 	}
@@ -68,9 +68,9 @@ intmax_t	match_literal_insensitive(PEG *rule, t_string_view *str, t_act act)
 		free(lower_str);
 		return (-1);
 	}
-	if (!ft_strncmp(lower_str, lower_target, ft_strlen(lower_target)))
+	if (!strncmp(lower_str, lower_target, strlen(lower_target)))
 	{
-		if (act != PEEK)
+		(void)act;
 			sv_chop_left(str, rule->rule.str_match.target->len);
 		free(lower_str);
 		free(lower_target);
@@ -83,10 +83,10 @@ intmax_t	match_literal_insensitive(PEG *rule, t_string_view *str, t_act act)
 
 intmax_t	match_literal(PEG *rule, t_string_view *str, t_act act)
 {
-	if (!ft_strncmp(rule->rule.str_match.target->string,
+	if (!strncmp(rule->rule.str_match.target->string,
 			str->string, rule->rule.str_match.target->len))
 	{
-		if (act != PEEK)
+		(void)act;
 			sv_chop_left(str, rule->rule.str_match.target->len);
 		return (rule->rule.str_match.target->len);
 	}

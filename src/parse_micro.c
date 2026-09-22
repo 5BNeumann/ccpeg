@@ -7,7 +7,7 @@ char	*parse_lit(char **str)
 	char	*res;
 
 	quote = *(*str)++;
-	res = ft_calloc(1, sizeof(char));
+	res = calloc(1, sizeof(char));
 	while (1)
 	{
 		if (!**str)
@@ -37,7 +37,7 @@ char	*parse_class(char **str)
 	char	*res;
 	char	s;
 
-	res = ft_calloc(1, sizeof(char));
+	res = calloc(1, sizeof(char));
 	while (*++(*str))
 	{
 		if (**str == ']')
@@ -51,13 +51,15 @@ char	*parse_class(char **str)
 			(*str) += 2;
 			while (++s != **str + 1)
 			{
-				res = ft_recalloc(res, LEN(res), LEN(res) + 2, sizeof(char));
-				res[LEN(res)] = s;
+				res = realloc(res, (strlen(res) + 2) * sizeof(char));
+				res[strlen(res) + 1] = 0;
+				res[strlen(res)] = s;
 			}
 			continue ;
 		}
-		res = ft_recalloc(res, LEN(res), LEN(res) + 2, sizeof(char));
-		res[LEN(res)] = **str;
+		res = realloc(res, (strlen(res) + 2) * sizeof(char));
+		res[strlen(res) + 1] = 0;
+		res[strlen(res)] = **str;
 	}
 	return (res);
 }

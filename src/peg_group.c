@@ -25,7 +25,7 @@ intmax_t	match_seq(PEG *rule, SV *str, char **mtch, t_act act)
 		res[0] += res[1];
 		current = current->next;
 	}
-	ft_free_nt_tab((void *)mcpy, MAX_MATCHES);
+	free_nt_tab((void *)mcpy, MAX_MATCHES);
 	return (res[0]);
 }
 
@@ -44,7 +44,7 @@ intmax_t	match_choiche(PEG *rule, SV *str, char **mtch, t_act act)
 		tmp = eval(current, str, mtch, act);
 		if (tmp >= 0)
 		{
-			ft_free_nt_tab((void *)mcpy, MAX_MATCHES);
+			free_nt_tab((void *)mcpy, MAX_MATCHES);
 			return (tmp);
 		}
 		current = current->next;
@@ -66,7 +66,7 @@ intmax_t	match_capture(PEG *rule, SV *str, char **mtch, t_act act)
 
 	r = eval(rule->rule.cap_match.rule, str, mtch, act);
 	if (r >= 0 && act == POKE)
-		mtch[ft_nt_tablen((void *)mtch)] = ft_strndup(str->string - r, r);
+		mtch[nt_tablen((void *)mtch)] = strndup(str->string - r, r);
 	return (r);
 }
 
@@ -76,7 +76,7 @@ intmax_t	destroy_capture(PEG *rule, SV *str, char **mtch, t_act act)
 
 	(void)rule;
 	(void)str;
-	matchn = ft_nt_tablen((void *)mtch);
+	matchn = nt_tablen((void *)mtch);
 	if (matchn > 0 && act == POKE)
 	{
 		free(mtch[matchn - 1]);
