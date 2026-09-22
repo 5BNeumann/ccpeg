@@ -2,7 +2,7 @@
 # define CCPEG_H
 # include <stdbool.h>
 # ifdef PEGGLE_DELUXE_SOURCES
-#  include "peggle_deluxe_int.h"
+#  include "ccpeg_int.h"
 # endif
 # ifndef PEG
 #  define PEG t_peg_rule

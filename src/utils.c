@@ -1,5 +1,5 @@
 #define PEGGLE_DELUXE_SOURCES
-#include "peggle_deluxe.h"
+#include "ccpeg.h"
 
 // @doc nt_tablen
 // @kind func
